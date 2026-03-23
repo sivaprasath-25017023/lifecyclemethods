@@ -52,6 +52,77 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+package com.example.ex1;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "LifecycleEvents";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        showMessage("onCreate");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        showMessage("onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showMessage("onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        showMessage("onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        showMessage("onStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        showMessage("onRestart");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        showMessage("onDestroy");
+    }
+
+    private void showMessage(String message) {
+        Log.d(TAG, message);
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+}
 ```
 activity_main.xml
 ```
@@ -105,7 +176,12 @@ AndroidManifest.xml
 ```
 
 ## OUTPUT
-<img width="497" height="1046" alt="image" src="https://github.com/user-attachments/assets/6868bba1-db4a-46eb-8c9d-06d237ff344e" />
+![1](https://github.com/user-attachments/assets/4c568685-0974-4803-b11b-2ded38e036a0)
+![2](https://github.com/user-attachments/assets/03b4b70a-30fb-4f6f-bdce-ac5a94607de0)
+![3](https://github.com/user-attachments/assets/583073f0-32e5-41e8-82a2-f4b14cd9c4a4)
+
+
+
 
 
 
